@@ -1,0 +1,15 @@
+.full-width-table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  margin-top: 22px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
