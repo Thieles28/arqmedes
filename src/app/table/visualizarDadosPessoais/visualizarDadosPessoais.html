@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>Detalhes</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <mat-grid-list cols="6" rowHeight="1:1">
+    <mat-grid-tile align="center" colspan="2" rowspan="1">
+      <div>
+        <h3>Nome</h3>
+        <p class="dados">{{ data.nome }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="2" rowspan="1">
+      <div>
+        <h3>Cpf</h3>
+        <p class="dados">{{ data.cpf | mask: '000.000.000-00' }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="2" rowspan="1">
+      <div>
+        <h3>Data Nascimento</h3>
+        <p class="dados">{{ data.dataNascimento | date: 'dd/MM/yyyy' }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="2" rowspan="1">
+      <div>
+        <h3>Profissão</h3>
+        <p class="dados">{{ data.profissao }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="2" rowspan="1">
+      <div>
+        <h3>Estado Civil</h3>
+        <p class="dados">{{ data.estadoCivil }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="1" rowspan="1">
+      <div>
+        <h3>Cidade</h3>
+        <p class="dados">{{ data.cidade.name }}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile align="center" colspan="1" rowspan="1">
+      <div>
+        <h3>Estado</h3>
+        <p class="dados">{{ data.estado }}</p>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="closeModal()" color="primary">Sair</button>
+</mat-dialog-actions>
