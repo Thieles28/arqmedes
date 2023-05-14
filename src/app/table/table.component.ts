@@ -1,15 +1,21 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ToastrService } from 'ngx-toastr';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 import { DadosPessoais } from '../model/DadosPessoais';
 import { DadosPessoaisComponent } from './dadosPessoais/dadosPessoais.component';
 import { RemoverDadosPessoais } from './removerDadosPessoais/removerDadosPessoais';
 import { TableService } from './table.service';
 import { VisualizarDadosPessoais } from './visualizarDadosPessoais/visualizarDadosPessoais';
+import { debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -21,7 +27,10 @@ export class TableComponent implements OnInit, AfterViewInit {
   dadosPessoais = new DadosPessoais();
   @ViewChild(MatPaginator) declare paginator: MatPaginator;
   @ViewChild(MatSort) declare sort: MatSort;
-
+  @ViewChild('campoBusca') declare campoBusca: ElementRef<HTMLInputElement>;
+  pageSize = 5;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25, 50, 100];
   displayedColumns = ['nome', 'dataNascimento', 'cpf', 'cidade', 'acoes'];
 
   constructor(
@@ -44,33 +53,39 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.filtro();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  private filtro() {
+    fromEvent(this.campoBusca.nativeElement, 'keyup')
+      .pipe(debounceTime(1000))
+      .subscribe((event: Event) => {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue;
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      });
   }
 
-  incluirDadosPessoais(result: FormGroup) {
+  incluirDadosPessoais(result: DadosPessoais) {
     this.tableService
-      .incluirDadosPessoais(result.value)
+      .incluirDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
-          this.toastr.success('Salvo com sucesso!');
+          this.toastr.success('Salvo com sucesso!', 'Sucesso', {
+            progressBar: true,
+          });
           this.retornaDadosPessoais();
         }
       });
   }
 
-  visualizarDadosPessoais(result: FormGroup) {
-    console.log('visualizarDadosPessoais: ', result.value);
+  visualizarDadosPessoais(result: DadosPessoais) {
     this.tableService
-      .visualizarDadosPessoais(result.value)
+      .visualizarDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
           this.retornaDadosPessoais();
@@ -83,6 +98,9 @@ export class TableComponent implements OnInit, AfterViewInit {
       .atualizarDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
+          this.toastr.success('Atualizado com sucesso!', 'Sucesso', {
+            progressBar: true,
+          });
           this.retornaDadosPessoais();
         }
       });
@@ -94,7 +112,6 @@ export class TableComponent implements OnInit, AfterViewInit {
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
           this.retornaDadosPessoais();
-          console.log('Dados pessoas deleta com sucesso:', res);
         }
       });
   }
@@ -103,11 +120,13 @@ export class TableComponent implements OnInit, AfterViewInit {
     if (this.dialog.openDialogs.length == 0) {
       const dialogRef = this.dialog.open(VisualizarDadosPessoais, {
         data: dadosPessoais,
-        height: '440px',
+        height: '510px',
         width: '800px',
       });
-      dialogRef.afterClosed().subscribe((result) => {
-        this.visualizarDadosPessoais(result);
+      dialogRef.afterClosed().subscribe((result: DadosPessoais) => {
+        if (result != null) {
+          this.visualizarDadosPessoais(result);
+        }
       });
     }
   }
@@ -120,8 +139,9 @@ export class TableComponent implements OnInit, AfterViewInit {
         width: '800px',
       });
       dialogRef.afterClosed().subscribe((result: DadosPessoais) => {
-        console.log('atulizarDadosDialogo: ', result);
-        this.atualizarDadosPessoais(result);
+        if (result != null) {
+          this.atualizarDadosPessoais(result);
+        }
       });
     }
   }
@@ -132,8 +152,10 @@ export class TableComponent implements OnInit, AfterViewInit {
         height: '440px',
         width: '800px',
       });
-      dialogRef.afterClosed().subscribe((result: FormGroup) => {
-        this.incluirDadosPessoais(result);
+      dialogRef.afterClosed().subscribe((result: DadosPessoais) => {
+        if (result != null) {
+          this.incluirDadosPessoais(result);
+        }
       });
     }
   }
@@ -152,5 +174,10 @@ export class TableComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
   }
 }

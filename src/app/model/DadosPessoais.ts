@@ -1,4 +1,6 @@
 import { Cidades } from './Cidades';
+import { EstadoCivil } from './EstadoCivil';
+import { Estados } from './Estados';
 
 export class DadosPessoais {
   declare id: number;
@@ -6,7 +8,7 @@ export class DadosPessoais {
   declare cpf: string;
   declare profissao: string;
   declare dataNascimento: string;
-  declare estadoCivil: string;
-  declare estado: string;
+  declare estadoCivil: EstadoCivil;
+  declare estado: Estados;
   declare cidade: Cidades;
 }

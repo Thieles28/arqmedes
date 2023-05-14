@@ -1,0 +1,36 @@
+<form [formGroup]="usuarioForm">
+  <div class="container">
+    <h1 class="mat-h1">Login</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="text" formControlName="email">
+      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+        Por favor insira um endereço de e-mail <strong>válido</strong>
+      </mat-error>
+      <mat-error *ngIf="email.hasError('emailIncorreta')">
+        Email <strong>inválida </strong>
+      </mat-error>
+      <mat-error *ngIf="email.hasError('required')">
+        Email é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password.hasError('maxlength')">
+        A senha deve possuir no máximo <strong>8 caracteres </strong>
+      </mat-error>
+      <mat-error *ngIf="password.hasError('passwordIncorreta')">
+        Senha <strong>inválida </strong>
+      </mat-error>
+      <mat-error *ngIf="password.hasError('required')">
+        Password é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="acessar()" [disabled]="usuarioForm.invalid">Entrar</button>
+  </div>
+</form>

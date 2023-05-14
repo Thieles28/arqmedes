@@ -1,74 +1,164 @@
 {
   "dadosPessoais": [
     {
-      "nome": "Thieles Martins dos Reis",
-      "cpf": "02030145106",
-      "profissao": "Developer Java",
-      "dataNascimento": "28101987",
-      "estadoCivil": 1,
-      "estado": "52",
+      "nome": "Amanda Costa",
+      "cpf": "02221316566",
+      "profissao": "Developer Angular",
+      "dataNascimento": "28101997",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
       "cidade": {
-        "state_id": 52,
-        "id": 5222302,
-        "name": "Vila Propício"
+        "state_id": 53,
+        "id": 5300143,
+        "name": "Vicente Pires"
       },
       "id": 1
     },
     {
-      "nome": "Rodrigo de Souza ",
-      "cpf": "55111335511",
+      "nome": "Thieles Martins dos Reis",
+      "cpf": "02030145106",
       "profissao": "Developer Angular",
-      "dataNascimento": "25101982",
-      "estadoCivil": 1,
-      "estado": "17",
+      "dataNascimento": "28101987",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "13",
+        "name": "Amazonas"
+      },
       "cidade": {
-        "state_id": 17,
-        "id": 1720903,
-        "name": "Taguatinga"
+        "state_id": 13,
+        "id": 1304401,
+        "name": "Urucurituba"
       },
       "id": 2
     },
     {
-      "nome": "Rogerio Ferreira Martins",
-      "cpf": "56054654646",
-      "profissao": "Developer Angular",
-      "dataNascimento": "12111990",
-      "estadoCivil": 1,
-      "estado": "53",
+      "nome": "Rodrigo de Souza",
+      "cpf": "02221316566",
+      "profissao": "Developer React",
+      "dataNascimento": "28101997",
+      "estadoCivil": {
+        "id": 2,
+        "nome": "Casado"
+      },
+      "estado": {
+        "state_id": "15",
+        "name": "Pará"
+      },
       "cidade": {
-        "state_id": 53,
-        "id": 5300125,
-        "name": "Planaltina"
+        "state_id": 15,
+        "id": 1508407,
+        "name": "Xinguara"
       },
       "id": 3
     },
     {
-      "nome": "Jeferson de Souza Brito",
-      "cpf": "64164613131",
+      "nome": "Rogerio Ferreria Martins ",
+      "cpf": "22113355478",
       "profissao": "Developer Angular",
-      "dataNascimento": "28102004",
-      "estadoCivil": 1,
-      "estado": "53",
+      "dataNascimento": "12111990",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
       "cidade": {
         "state_id": 53,
-        "id": 5300125,
-        "name": "Planaltina"
+        "id": 5300143,
+        "name": "Vicente Pires"
       },
       "id": 4
     },
     {
-      "nome": "Carlos de Alberto",
-      "cpf": "03213131333",
-      "profissao": "Developer Java",
-      "dataNascimento": "28101999",
-      "estadoCivil": 3,
-      "estado": "52",
+      "nome": "Rodrigo de Souza",
+      "cpf": "02221316566",
+      "profissao": "Developer React",
+      "dataNascimento": "28101997",
+      "estadoCivil": {
+        "id": 2,
+        "nome": "Casado"
+      },
+      "estado": {
+        "state_id": "52",
+        "name": "Goiás"
+      },
       "cidade": {
         "state_id": 52,
-        "id": 5222302,
-        "name": "Vila Propício"
+        "id": 5222203,
+        "name": "Vila Boa"
       },
       "id": 5
+    },
+    {
+      "nome": "Thieles Martins dos Reis",
+      "cpf": "02030145106",
+      "profissao": "Developer Angular",
+      "dataNascimento": "28101987",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
+      "cidade": {
+        "state_id": 53,
+        "id": 5300143,
+        "name": "Vicente Pires"
+      },
+      "id": 6
+    },
+    {
+      "nome": "Ricardo de Souza Nunes",
+      "cpf": "21646546464",
+      "profissao": "Develper Anguler",
+      "dataNascimento": "28111999",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
+      "cidade": {
+        "state_id": 53,
+        "id": 5300143,
+        "name": "Vicente Pires"
+      },
+      "id": 7
+    },
+    {
+      "nome": "Carlos de Souza",
+      "cpf": "01213465456",
+      "profissao": "Developer Python",
+      "dataNascimento": "22101988",
+      "estadoCivil": {
+        "id": 2,
+        "nome": "Casado"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
+      "cidade": {
+        "state_id": 53,
+        "id": 5300127,
+        "name": "Recanto das Emas"
+      },
+      "id": 8
     }
   ],
   "estadoCivil": [
@@ -101,9 +191,13 @@
       "nome": "Outros"
     }
   ],
-  "profile": {
-    "name": "typicode"
-  },
+  "usuario": [
+    {
+      "id": 1,
+      "email": "thielesmartinsdosreis@gmail.com",
+      "password": "Thayl@25"
+    }
+  ],
   "estados": [
     {
       "state_id": "11",

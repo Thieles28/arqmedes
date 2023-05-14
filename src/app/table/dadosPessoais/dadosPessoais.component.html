@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ data ? 'Atulizar Usuário' :'Incluir Usuário' }}</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="dadosPessoaisForm" class="example-form">
+  <form [formGroup]="dadosPessoaisForm" class="example-form" *ngIf="dadosPessoaisForm">
     <mat-grid-list cols="4" rowHeight="2:1">
       <mat-grid-tile colspan="3" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
@@ -29,23 +29,24 @@
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Estado Civil</mat-label>
-          <mat-select formControlName="estadoCivil">
-            <mat-option *ngFor="let civil of estadosCivil" [value]="civil.id">{{ civil.nome }}</mat-option>
+          <mat-select formControlName="estadoCivil" [compareWith]="compareOsValoresDoEstadoCivil">
+            <mat-option *ngFor="let civil of estadosCivil" [value]="civil">{{ civil.nome }}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>UF</mat-label>
-          <mat-select formControlName="estado" (valueChange)="carregarIdEstado($event)">
-            <mat-option *ngFor="let estado of estados" [value]="estado.state_id">{{ estado.name }}</mat-option>
+          <mat-select formControlName="estado" (valueChange)="carregarIdEstado($event)"
+            [compareWith]="compareOsValoresDoEstado">
+            <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado.name }}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Cidade</mat-label>
-          <mat-select formControlName="cidade">
+          <mat-select formControlName="cidade" [compareWith]="compareOsValoresDoCidade">
             <mat-option *ngFor="let cidade of cidades" [value]="cidade">{{ cidade.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -55,6 +56,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button (click)="closeModal()">Cancelar</button>
-  <button mat-raised-button (click)="carregarDadosModal()" color="primary" cdkFocusInitial
-    [disabled]="dadosPessoaisForm.invalid">{{ data ? 'Atualizar': 'Incluir' }}</button>
+  <button mat-raised-button (click)="carregarDadosModal()" color="primary" [disabled]="dadosPessoaisForm.invalid">{{
+    data ? 'Atualizar': 'Incluir' }}</button>
 </mat-dialog-actions>

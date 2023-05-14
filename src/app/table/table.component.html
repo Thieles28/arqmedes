@@ -2,7 +2,7 @@
   <mat-grid-tile colspan="9" rowspan="1">
     <mat-form-field>
       <mat-label>Filtrar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Rodrigo" #input>
+      <input #campoBusca matInput placeholder="Ex. Rodrigo" #input>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
@@ -59,7 +59,6 @@
       <td class="mat-cell" colspan="4">Nenhum dado correspondente ao filtro "{{input.value}}"</td>
     </tr>
   </table>
-
-  <mat-paginator [length]="dataSource.data.length" [pageSizeOptions]="[10, 25, 100]"
-    aria-label="Select page of users"></mat-paginator>
+  <mat-paginator (page)="handlePageEvent($event)" [length]="dataSource.data.length" [pageSizeOptions]="pageSizeOptions"
+    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"></mat-paginator>
 </div>

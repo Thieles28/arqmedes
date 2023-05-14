@@ -1,10 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Cidades } from 'src/app/model/Cidades';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
@@ -32,11 +27,10 @@ export class DadosPessoaisComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('Atualizar', this.data);
     this.retornaDadosDosEstados();
     this.retornaDadosDoEstadoCivil();
     this.criarDadosPessoaisForm(new DadosPessoais());
-    this.atualizarDadosPessoaisForm(this.data);
+    this.recarregaOsDadosPessoaisForm();
   }
 
   criarDadosPessoaisForm(dadosPessoais: DadosPessoais) {
@@ -63,6 +57,13 @@ export class DadosPessoaisComponent implements OnInit {
     });
   }
 
+  private recarregaOsDadosPessoaisForm() {
+    if (this.data != null) {
+      this.atualizarDadosPessoaisForm(this.data);
+      this.carregarIdEstado(this.data.estado);
+    }
+  }
+
   retornaDadosDosEstados() {
     this.tableService.dadosEstados().subscribe((res: Array<Estados>) => {
       this.estados = res;
@@ -77,14 +78,14 @@ export class DadosPessoaisComponent implements OnInit {
       });
   }
 
-  carregarIdEstado(event: number) {
-    this.retornaDadosDasCidades(event.toString());
+  carregarIdEstado(estados: Estados) {
+    this.retornaDadosDasCidades(estados);
   }
 
-  retornaDadosDasCidades(state_id: string) {
+  retornaDadosDasCidades(estados: Estados) {
     this.tableService.dadosCidades().subscribe((res: Array<Cidades>) => {
       res.map((cd: Cidades) => {
-        if (cd.state_id == state_id) {
+        if (cd.state_id == estados.state_id) {
           this.cidade.patchValue(cd);
           this.cidades.push(this.cidade.value);
         }
@@ -93,11 +94,11 @@ export class DadosPessoaisComponent implements OnInit {
   }
 
   get estado() {
-    return this.dadosPessoaisForm.get('estado') as FormControl;
+    return this.dadosPessoaisForm.get('estado') as FormGroup;
   }
 
   get cidade() {
-    return this.dadosPessoaisForm.get('cidade') as FormControl;
+    return this.dadosPessoaisForm.get('cidade') as FormGroup;
   }
 
   closeModal() {
@@ -106,7 +107,21 @@ export class DadosPessoaisComponent implements OnInit {
 
   carregarDadosModal() {
     this.dadosPessoais = this.dadosPessoaisForm.value;
-    this.dadosPessoais.id = this.data.id;
+    if (this.data != null) {
+      this.dadosPessoais.id = this.data.id;
+    }
     this.dialogRef.close(this.dadosPessoais);
+  }
+
+  compareOsValoresDoEstadoCivil(v1: EstadoCivil, v2: EstadoCivil) {
+    return v1 && v2 ? v1.id === v2.id : v1 === v2;
+  }
+
+  compareOsValoresDoEstado(v1: Estados, v2: Estados) {
+    return v1 && v2 ? v1.state_id === v2.state_id : v1 === v2;
+  }
+
+  compareOsValoresDoCidade(v1: Cidades, v2: Cidades) {
+    return v1 && v2 ? v1.id === v2.id : v1 === v2;
   }
 }
