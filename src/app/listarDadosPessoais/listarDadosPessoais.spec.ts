@@ -4,26 +4,26 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
-import { TableComponent } from './table.component';
+import { ListarDadosPessoais } from './listarDadosPessoais';
 
-describe('TableComponent', () => {
-  let component: TableComponent;
-  let fixture: ComponentFixture<TableComponent>;
+describe('ListarDadosPessoais', () => {
+  let component: ListarDadosPessoais;
+  let fixture: ComponentFixture<ListarDadosPessoais>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TableComponent],
+      declarations: [ListarDadosPessoais],
       imports: [
         NoopAnimationsModule,
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
-      ]
+      ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableComponent);
+    fixture = TestBed.createComponent(ListarDadosPessoais);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TableService {
+export class ListarDadosPessoaisService {
   constructor(private http: HttpClient) {}
 
   usuario(): Observable<Array<Usuario>> {

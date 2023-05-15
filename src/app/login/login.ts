@@ -5,9 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Usuario } from '../model/Usuario';
-import { TableService } from '../table/table.service';
 import { Router } from '@angular/router';
+import { ListarDadosPessoaisService } from '../listarDadosPessoais/listarDadosPessoais.service';
+import { Usuario } from '../model/Usuario';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class Login implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private tableService: TableService,
+    private listarDadosPessoaisService: ListarDadosPessoaisService,
     private router: Router
   ) {}
 
@@ -39,13 +39,15 @@ export class Login implements OnInit {
   }
 
   acessar() {
-    this.tableService.usuario().subscribe((res: Array<Usuario>) => {
-      res.map((usuario: Usuario) => {
-        this.validarEmail(usuario);
-        this.validarPassword(usuario);
-        this.validarUsuarioLogado(usuario);
+    this.listarDadosPessoaisService
+      .usuario()
+      .subscribe((res: Array<Usuario>) => {
+        res.map((usuario: Usuario) => {
+          this.validarEmail(usuario);
+          this.validarPassword(usuario);
+          this.validarUsuarioLogado(usuario);
+        });
       });
-    });
   }
 
   validarEmail(usuario: Usuario) {

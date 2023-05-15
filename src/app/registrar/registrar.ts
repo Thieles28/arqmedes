@@ -6,9 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Usuario } from '../model/Usuario';
-import { TableService } from '../table/table.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ListarDadosPessoaisService } from '../listarDadosPessoais/listarDadosPessoais.service';
 
 @Component({
   selector: 'app-registrar',
@@ -23,7 +23,7 @@ export class Registrar implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private tableService: TableService,
+    private listarDadosPessoaisService: ListarDadosPessoaisService,
     private toastr: ToastrService,
     private router: Router
   ) {}
@@ -50,7 +50,7 @@ export class Registrar implements OnInit {
   }
 
   dadosUsuario() {
-    this.tableService.usuario().subscribe((res: Array<Usuario>) => {
+    this.listarDadosPessoaisService.usuario().subscribe((res: Array<Usuario>) => {
       res.map((usuario: Usuario) => {
         this.usuario = usuario;
       });
@@ -68,7 +68,7 @@ export class Registrar implements OnInit {
   }
 
   private registrarUsuario() {
-    this.tableService
+    this.listarDadosPessoaisService
       .registrarUsuario(this.usuarioForm.value)
       .subscribe((res: Usuario) => {
         if (res != null) {

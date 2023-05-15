@@ -6,15 +6,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NavigationComponent } from './navigation.component';
+import { Navigation } from './navigation';
 
-describe('NavigationComponent', () => {
-  let component: NavigationComponent;
-  let fixture: ComponentFixture<NavigationComponent>;
+describe('Navigation', () => {
+  let component: Navigation;
+  let fixture: ComponentFixture<Navigation>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationComponent],
+      declarations: [Navigation],
       imports: [
         NoopAnimationsModule,
         MatButtonModule,
@@ -22,12 +22,12 @@ describe('NavigationComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-      ]
+      ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationComponent);
+    fixture = TestBed.createComponent(Navigation);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

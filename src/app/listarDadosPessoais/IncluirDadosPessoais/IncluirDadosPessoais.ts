@@ -5,14 +5,14 @@ import { Cidades } from 'src/app/model/Cidades';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
 import { EstadoCivil } from 'src/app/model/EstadoCivil';
 import { Estados } from 'src/app/model/Estados';
-import { TableService } from '../table.service';
+import { ListarDadosPessoaisService } from '../listarDadosPessoais.service';
 
 @Component({
-  selector: 'app-dadosPessoais',
-  templateUrl: './dadosPessoais.component.html',
-  styleUrls: ['./dadosPessoais.component.css'],
+  selector: 'app-incluirDadosPessoais',
+  templateUrl: './incluirDadosPessoais.html',
+  styleUrls: ['./incluirDadosPessoais.css'],
 })
-export class DadosPessoaisComponent implements OnInit {
+export class IncluirDadosPessoais implements OnInit {
   declare dadosPessoaisForm: FormGroup;
   declare estados: Array<Estados>;
   declare estadosCivil: Array<EstadoCivil>;
@@ -20,9 +20,9 @@ export class DadosPessoaisComponent implements OnInit {
   dadosPessoais: DadosPessoais = new DadosPessoais();
 
   constructor(
-    private tableService: TableService,
+    private listarDadosPessoaisService: ListarDadosPessoaisService,
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<DadosPessoaisComponent>,
+    public dialogRef: MatDialogRef<DadosPessoais>,
     @Inject(MAT_DIALOG_DATA) public data: DadosPessoais
   ) {}
 
@@ -65,13 +65,15 @@ export class DadosPessoaisComponent implements OnInit {
   }
 
   retornaDadosDosEstados() {
-    this.tableService.dadosEstados().subscribe((res: Array<Estados>) => {
-      this.estados = res;
-    });
+    this.listarDadosPessoaisService
+      .dadosEstados()
+      .subscribe((res: Array<Estados>) => {
+        this.estados = res;
+      });
   }
 
   retornaDadosDoEstadoCivil() {
-    this.tableService
+    this.listarDadosPessoaisService
       .dadosEstadoCivil()
       .subscribe((res: Array<EstadoCivil>) => {
         this.estadosCivil = res;
@@ -83,14 +85,16 @@ export class DadosPessoaisComponent implements OnInit {
   }
 
   retornaDadosDasCidades(estados: Estados) {
-    this.tableService.dadosCidades().subscribe((res: Array<Cidades>) => {
-      res.map((cd: Cidades) => {
-        if (cd.state_id == estados.state_id) {
-          this.cidade.patchValue(cd);
-          this.cidades.push(this.cidade.value);
-        }
+    this.listarDadosPessoaisService
+      .dadosCidades()
+      .subscribe((res: Array<Cidades>) => {
+        res.map((cd: Cidades) => {
+          if (cd.state_id == estados.state_id) {
+            this.cidade.patchValue(cd);
+            this.cidades.push(this.cidade.value);
+          }
+        });
       });
-    });
   }
 
   get estado() {

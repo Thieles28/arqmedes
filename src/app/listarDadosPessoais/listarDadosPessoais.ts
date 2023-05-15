@@ -12,17 +12,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, fromEvent } from 'rxjs';
 import { DadosPessoais } from '../model/DadosPessoais';
-import { DadosPessoaisComponent } from './dadosPessoais/dadosPessoais.component';
+import { IncluirDadosPessoais } from './IncluirDadosPessoais/IncluirDadosPessoais';
+import { ListarDadosPessoaisService } from './listarDadosPessoais.service';
 import { RemoverDadosPessoais } from './removerDadosPessoais/removerDadosPessoais';
-import { TableService } from './table.service';
 import { VisualizarDadosPessoais } from './visualizarDadosPessoais/visualizarDadosPessoais';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: 'app-listarDadosPessoais',
+  templateUrl: './listarDadosPessoais.html',
+  styleUrls: ['./listarDadosPessoais.css'],
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class ListarDadosPessoais implements OnInit, AfterViewInit {
   declare dataSource: MatTableDataSource<DadosPessoais>;
   dadosPessoais = new DadosPessoais();
   @ViewChild(MatPaginator) declare paginator: MatPaginator;
@@ -35,7 +35,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   displayedColumns = ['nome', 'dataNascimento', 'cpf', 'cidade', 'acoes'];
 
   constructor(
-    private tableService: TableService,
+    private listarDadosPessoaisService: ListarDadosPessoaisService,
     public dialog: MatDialog,
     private toastr: ToastrService
   ) {}
@@ -45,15 +45,17 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   retornaDadosPessoais() {
-    this.tableService.dadosPessoais().subscribe((res: Array<DadosPessoais>) => {
-      this.dataSource = new MatTableDataSource(res);
-      this.totalSize = res.length;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      res.map((res: DadosPessoais) => {
-        this.dadosPessoais = res;
+    this.listarDadosPessoaisService
+      .dadosPessoais()
+      .subscribe((res: Array<DadosPessoais>) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.totalSize = res.length;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        res.map((res: DadosPessoais) => {
+          this.dadosPessoais = res;
+        });
       });
-    });
   }
 
   ngAfterViewInit() {
@@ -73,7 +75,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   incluirDadosPessoais(result: DadosPessoais) {
-    this.tableService
+    this.listarDadosPessoaisService
       .incluirDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
@@ -86,7 +88,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   visualizarDadosPessoais(result: DadosPessoais) {
-    this.tableService
+    this.listarDadosPessoaisService
       .visualizarDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
@@ -96,7 +98,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   atualizarDadosPessoais(result: DadosPessoais) {
-    this.tableService
+    this.listarDadosPessoaisService
       .atualizarDadosPessoais(result)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
@@ -109,7 +111,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   removerDadosPessoais() {
-    this.tableService
+    this.listarDadosPessoaisService
       .removerDadosPessoais(this.dadosPessoais)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
@@ -138,7 +140,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   atulizarDadosDialogo(dadosPessoais: DadosPessoais) {
     if (this.dialog.openDialogs.length == 0) {
-      const dialogRef = this.dialog.open(DadosPessoaisComponent, {
+      const dialogRef = this.dialog.open(IncluirDadosPessoais, {
         data: dadosPessoais,
         height: '440px',
         width: '800px',
@@ -153,7 +155,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   abrirDialogo() {
     if (this.dialog.openDialogs.length == 0) {
-      const dialogRef = this.dialog.open(DadosPessoaisComponent, {
+      const dialogRef = this.dialog.open(IncluirDadosPessoais, {
         height: '440px',
         width: '800px',
       });
