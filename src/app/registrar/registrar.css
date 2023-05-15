@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 140px;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 30%;
+}
+
+.mat-h1 {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 500;
+  margin: 35px
+}
+
+.mat-mdc-fab.mat-primary, .mat-mdc-mini-fab.mat-primary {
+  width: 20%;
+}
+
+.mat-mdc-raised-button.mat-mdc-button-base {
+  height: 50px;
+  width: 30%;
+}
+

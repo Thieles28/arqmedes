@@ -111,6 +111,9 @@ export class TableComponent implements OnInit, AfterViewInit {
       .removerDadosPessoais(this.dadosPessoais)
       .subscribe((res: DadosPessoais) => {
         if (res != null) {
+          this.toastr.success('Removido com sucesso!', 'Sucesso', {
+            progressBar: true,
+          });
           this.retornaDadosPessoais();
         }
       });

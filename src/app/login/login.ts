@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './login.html',
+  styleUrls: ['./login.css'],
 })
-export class LoginComponent implements OnInit {
+export class Login implements OnInit {
   declare usuarioForm: FormGroup;
   hide = true;
 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
       usuario.email == this.email.value &&
       usuario.password == this.password.value
     ) {
-      this.router.navigate(['/navigation']);
+      this.router.navigate(['/dashboard']);
     }
   }
 

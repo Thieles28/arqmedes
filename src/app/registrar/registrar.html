@@ -1,14 +1,11 @@
 <form [formGroup]="usuarioForm">
   <div class="container">
-    <h1 class="mat-h1">Login</h1>
+    <h1 class="mat-h1">Registrar</h1>
     <mat-form-field appearance="fill">
       <mat-label>E-mail</mat-label>
       <input matInput type="text" formControlName="email">
       <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
         Por favor insira um endereço de e-mail <strong>válido</strong>
-      </mat-error>
-      <mat-error *ngIf="email.hasError('emailIncorreta')">
-        Email <strong>inválida </strong>
       </mat-error>
       <mat-error *ngIf="email.hasError('required')">
         Email é <strong>obrigatório</strong>
@@ -24,13 +21,28 @@
       <mat-error *ngIf="password.hasError('maxlength')">
         A senha deve possuir no máximo <strong>8 caracteres </strong>
       </mat-error>
-      <mat-error *ngIf="password.hasError('passwordIncorreta')">
-        Senha <strong>inválida </strong>
-      </mat-error>
       <mat-error *ngIf="password.hasError('required')">
         Password é <strong>obrigatório</strong>
       </mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="acessar()" [disabled]="usuarioForm.invalid">Entrar</button>
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword">
+      <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm"
+        [attr.aria-label]="'hideConfirm confirmPassword'" [attr.aria-pressed]="hideConfirm">
+        <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="confirmPassword.hasError('maxlength')">
+        A senha deve possuir no máximo <strong>8 caracteres </strong>
+      </mat-error>
+      <mat-error *ngIf="confirmPassword.hasError('mustMatch')">
+        As senhas devem corresponder
+      </mat-error>
+      <mat-error *ngIf="confirmPassword.hasError('required')">
+        Confirm Password é <strong>obrigatório</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="validarUsuario()"
+      [disabled]="usuarioForm.invalid">Registrar</button>
   </div>
 </form>

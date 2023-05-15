@@ -15,7 +15,8 @@ import { TableComponent } from './table/table.component';
 import { VisualizarDadosPessoais } from './table/visualizarDadosPessoais/visualizarDadosPessoais';
 import { RemoverDadosPessoais } from './table/removerDadosPessoais/removerDadosPessoais';
 import { ToastrModule } from 'ngx-toastr';
-import { LoginComponent } from './login/login.component';
+import { Login } from './login/login';
+import { Registrar } from './registrar/registrar';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginComponent } from './login/login.component';
     DadosPessoaisComponent,
     VisualizarDadosPessoais,
     RemoverDadosPessoais,
-    LoginComponent,
+    Login,
+    Registrar,
   ],
   imports: [
     BrowserModule,

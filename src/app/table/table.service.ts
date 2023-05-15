@@ -18,6 +18,10 @@ export class TableService {
     return this.http.get<Array<Usuario>>(`${environment.apiUrl}/usuario`);
   }
 
+  registrarUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${environment.apiUrl}/usuario`, usuario);
+  }
+
   dadosPessoais(): Observable<Array<DadosPessoais>> {
     return this.http.get<Array<DadosPessoais>>(
       `${environment.apiUrl}/dadosPessoais`
