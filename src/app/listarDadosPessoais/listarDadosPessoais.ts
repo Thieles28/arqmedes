@@ -31,6 +31,7 @@ export class ListarDadosPessoais implements OnInit, AfterViewInit {
   pageSize = 5;
   pageIndex = 0;
   totalSize = 0;
+  show: boolean = true;
   pageSizeOptions = [5, 10, 25, 50, 100];
   displayedColumns = ['nome', 'dataNascimento', 'cpf', 'cidade', 'acoes'];
 
@@ -67,9 +68,13 @@ export class ListarDadosPessoais implements OnInit, AfterViewInit {
       .pipe(debounceTime(1000))
       .subscribe((event: Event) => {
         const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue;
-        if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
+        console.log('filtro: ', filterValue);
+        if (filterValue.length > 2 || filterValue.length < 3) {
+          const semNumeros = filterValue.replace(/[0-9]/g, '');
+          this.dataSource.filter = semNumeros;
+          if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+          }
         }
       });
   }

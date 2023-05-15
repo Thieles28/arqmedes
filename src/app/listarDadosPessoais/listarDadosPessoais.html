@@ -7,7 +7,7 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
     <div class="flex-container">
-      <button mat-fab color="primary" (click)="abrirDialogo()">
+      <button mat-fab color="primary" matTooltip="Incluir" [matTooltipPosition]="'above'" (click)="abrirDialogo()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -60,5 +60,6 @@
     </tr>
   </table>
   <mat-paginator (page)="handlePageEvent($event)" [length]="totalSize" [pageSizeOptions]="pageSizeOptions"
-    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"></mat-paginator>
+    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"
+    [showFirstLastButtons]="show"></mat-paginator>
 </div>
