@@ -219,6 +219,26 @@
         "name": "Plano Piloto"
       },
       "id": 11
+    },
+    {
+      "nome": "Thayla Beatriz Martins Brito",
+      "cpf": "02316546464",
+      "profissao": "Developer Angular",
+      "dataNascimento": "2011-05-25T03:00:00.000Z",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
+      "cidade": {
+        "state_id": 53,
+        "id": 5300143,
+        "name": "Vicente Pires"
+      },
+      "id": 12
     }
   ],
   "estadoCivil": [

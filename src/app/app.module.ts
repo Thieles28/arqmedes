@@ -17,6 +17,7 @@ import { VisualizarDadosPessoais } from './listarDadosPessoais/visualizarDadosPe
 import { Login } from './login/login';
 import { Navigation } from './navigation/navigation';
 import { Registrar } from './registrar/registrar';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,10 @@ import { Registrar } from './registrar/registrar';
     NgxMaskDirective,
     NgxMaskPipe,
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

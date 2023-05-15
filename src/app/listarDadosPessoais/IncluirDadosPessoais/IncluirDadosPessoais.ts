@@ -24,6 +24,7 @@ export class IncluirDadosPessoais implements OnInit {
   declare estadosCivil: Array<EstadoCivil>;
   cidades: Array<Cidades> = new Array<Cidades>();
   dadosPessoais: DadosPessoais = new DadosPessoais();
+  disabled: boolean = true;
 
   constructor(
     private listarDadosPessoaisService: ListarDadosPessoaisService,
@@ -57,7 +58,10 @@ export class IncluirDadosPessoais implements OnInit {
   atualizarDadosPessoaisForm(dadosPessoais: DadosPessoais) {
     this.dadosPessoaisForm = this.fb.group({
       nome: [dadosPessoais.nome, [Validators.required]],
-      cpf: [dadosPessoais.cpf, [Validators.required]],
+      cpf: [
+        { value: dadosPessoais.cpf, disabled: true },
+        [Validators.required],
+      ],
       profissao: [dadosPessoais.profissao, [Validators.required]],
       dataNascimento: [dadosPessoais.dataNascimento, [Validators.required]],
       estadoCivil: [dadosPessoais.estadoCivil, [Validators.required]],
