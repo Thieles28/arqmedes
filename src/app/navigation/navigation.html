@@ -2,6 +2,10 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <span>Arqmedes</span>
+      <span class="spacer"></span>
+      <button mat-icon-button [routerLink]="['/login']">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
     <app-dashboard></app-dashboard>
   </mat-sidenav-content>

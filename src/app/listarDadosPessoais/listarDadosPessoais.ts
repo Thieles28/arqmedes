@@ -127,7 +127,7 @@ export class ListarDadosPessoais implements OnInit, AfterViewInit {
     if (this.dialog.openDialogs.length == 0) {
       const dialogRef = this.dialog.open(VisualizarDadosPessoais, {
         data: dadosPessoais,
-        height: '510px',
+        height: '420px',
         width: '800px',
       });
       dialogRef.afterClosed().subscribe((result: DadosPessoais) => {
