@@ -14,7 +14,7 @@
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Cpf</mat-label>
-          <input matInput formControlName="cpf" mask="000.000.000-00">
+          <input matInput formControlName="cpf" mask="000.000.000-00" [disabled]="cpf.disabled">
           <mat-error *ngIf="cpf.hasError('required')">
             Cpf é obrigatório
           </mat-error>

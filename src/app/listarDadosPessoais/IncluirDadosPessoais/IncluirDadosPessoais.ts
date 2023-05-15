@@ -60,7 +60,7 @@ export class IncluirDadosPessoais implements OnInit {
       nome: [dadosPessoais.nome, [Validators.required]],
       cpf: [
         { value: dadosPessoais.cpf, disabled: true },
-        [Validators.required],
+        Validators.compose([Validators.required, Validacoes.ValidaCpf]),
       ],
       profissao: [dadosPessoais.profissao, [Validators.required]],
       dataNascimento: [dadosPessoais.dataNascimento, [Validators.required]],
@@ -146,6 +146,7 @@ export class IncluirDadosPessoais implements OnInit {
     this.dadosPessoais = this.dadosPessoaisForm.value;
     if (this.data != null) {
       this.dadosPessoais.id = this.data.id;
+      this.dadosPessoais.cpf = this.data.cpf;
     }
     this.dialogRef.close(this.dadosPessoais);
   }

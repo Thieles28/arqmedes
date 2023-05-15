@@ -2,9 +2,8 @@
   "dadosPessoais": [
     {
       "nome": "Thieles Martins dos Reis",
-      "cpf": "02030145106",
       "profissao": "Developer Angular",
-      "dataNascimento": "28101987",
+      "dataNascimento": "28101990",
       "estadoCivil": {
         "id": 1,
         "nome": "Solteiro"
@@ -15,14 +14,14 @@
       },
       "cidade": {
         "state_id": 53,
-        "id": 5300143,
-        "name": "Vicente Pires"
+        "id": 5300125,
+        "name": "Planaltina"
       },
-      "id": 1
+      "id": 1,
+      "cpf": "13213213211"
     },
     {
-      "nome": "Ricardo de Souza",
-      "cpf": "22345464897",
+      "nome": "Ricardo de Souza6",
       "profissao": "Developer Angular",
       "dataNascimento": "22101992",
       "estadoCivil": {
@@ -38,11 +37,12 @@
         "id": 5300143,
         "name": "Vicente Pires"
       },
-      "id": 2
+      "id": 2,
+      "cpf": "13213213132"
     },
     {
       "nome": "Alberto de Souza",
-      "cpf": "11222334455",
+      "cpf": "46546546545",
       "profissao": "Developer Java",
       "dataNascimento": "22101998",
       "estadoCivil": {
@@ -55,14 +55,13 @@
       },
       "cidade": {
         "state_id": 53,
-        "id": 5300123,
-        "name": "Paranoá"
+        "id": 5300143,
+        "name": "Vicente Pires"
       },
       "id": 3
     },
     {
       "nome": "Rodrigo de souza",
-      "cpf": "13213163416",
       "profissao": "Developer Full Stack",
       "dataNascimento": "22101993",
       "estadoCivil": {
@@ -75,14 +74,14 @@
       },
       "cidade": {
         "state_id": 53,
-        "id": 5300120,
-        "name": "Lago Norte"
+        "id": 5300143,
+        "name": "Vicente Pires"
       },
-      "id": 4
+      "id": 4,
+      "cpf": "21313216465"
     },
     {
       "nome": "Jessica da silva brito",
-      "cpf": "02031114455",
       "profissao": "Developer React",
       "dataNascimento": "30091990",
       "estadoCivil": {
@@ -98,7 +97,8 @@
         "id": 5222302,
         "name": "Vila Propício"
       },
-      "id": 5
+      "id": 5,
+      "cpf": "02031114455"
     },
     {
       "nome": "Yasmin Mariah Martins Brito",
@@ -261,10 +261,10 @@
       "id": 13
     },
     {
-      "nome": "Thieles Martins de Souza",
-      "cpf": "23113113113",
-      "profissao": "Developer Angular",
-      "dataNascimento": "28101987",
+      "nome": "Fernando de Souza",
+      "cpf": "02230144556",
+      "profissao": "Developer Java",
+      "dataNascimento": "22111990",
       "estadoCivil": {
         "id": 1,
         "nome": "Solteiro"
