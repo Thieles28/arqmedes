@@ -179,6 +179,26 @@
         "name": "Vicente Pires"
       },
       "id": 9
+    },
+    {
+      "nome": "Alberto de souza",
+      "cpf": "02322111333",
+      "profissao": "Developer Angular",
+      "dataNascimento": "28101999",
+      "estadoCivil": {
+        "id": 1,
+        "nome": "Solteiro"
+      },
+      "estado": {
+        "state_id": "53",
+        "name": "Distrito Federal"
+      },
+      "cidade": {
+        "state_id": 53,
+        "id": 5300124,
+        "name": "Park Way"
+      },
+      "id": 10
     }
   ],
   "estadoCivil": [

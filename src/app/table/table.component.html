@@ -59,6 +59,6 @@
       <td class="mat-cell" colspan="4">Nenhum dado correspondente ao filtro "{{input.value}}"</td>
     </tr>
   </table>
-  <mat-paginator (page)="handlePageEvent($event)" [length]="dataSource.data.length" [pageSizeOptions]="pageSizeOptions"
+  <mat-paginator (page)="handlePageEvent($event)" [length]="totalSize" [pageSizeOptions]="pageSizeOptions"
     [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex"></mat-paginator>
 </div>

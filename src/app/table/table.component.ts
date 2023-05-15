@@ -9,13 +9,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IndividualConfig, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { debounceTime, fromEvent } from 'rxjs';
 import { DadosPessoais } from '../model/DadosPessoais';
 import { DadosPessoaisComponent } from './dadosPessoais/dadosPessoais.component';
 import { RemoverDadosPessoais } from './removerDadosPessoais/removerDadosPessoais';
 import { TableService } from './table.service';
 import { VisualizarDadosPessoais } from './visualizarDadosPessoais/visualizarDadosPessoais';
-import { debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -30,6 +30,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   @ViewChild('campoBusca') declare campoBusca: ElementRef<HTMLInputElement>;
   pageSize = 5;
   pageIndex = 0;
+  totalSize = 0;
   pageSizeOptions = [5, 10, 25, 50, 100];
   displayedColumns = ['nome', 'dataNascimento', 'cpf', 'cidade', 'acoes'];
 
@@ -46,6 +47,9 @@ export class TableComponent implements OnInit, AfterViewInit {
   retornaDadosPessoais() {
     this.tableService.dadosPessoais().subscribe((res: Array<DadosPessoais>) => {
       this.dataSource = new MatTableDataSource(res);
+      this.totalSize = res.length;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       res.map((res: DadosPessoais) => {
         this.dadosPessoais = res;
       });
@@ -54,8 +58,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.filtro();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   private filtro() {
