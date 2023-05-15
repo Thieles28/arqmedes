@@ -6,24 +6,39 @@
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="nome">
+          <mat-error *ngIf="nome.hasError('required')">
+            Nome é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Cpf</mat-label>
           <input matInput formControlName="cpf" mask="000.000.000-00">
+          <mat-error *ngIf="cpf.hasError('required')">
+            Cpf é obrigatório
+          </mat-error>
+          <mat-error *ngIf="!cpf.hasError('required') && cpf.hasError('cpfInvalido')">
+            Digite um CPF válido
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Profissão</mat-label>
           <input matInput formControlName="profissao">
+          <mat-error *ngIf="profissao.hasError('required')">
+            Profissão é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="1">
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Data Nascimento</mat-label>
           <input matInput formControlName="dataNascimento" mask="d0/M0/0000">
+          <mat-error *ngIf="dataNascimento.hasError('required')">
+            Data Nascimento é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="1">
@@ -32,6 +47,9 @@
           <mat-select formControlName="estadoCivil" [compareWith]="compareOsValoresDoEstadoCivil">
             <mat-option *ngFor="let civil of estadosCivil" [value]="civil">{{ civil.nome }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="estadoCivil.hasError('required')">
+            Estado Civil é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
@@ -41,6 +59,9 @@
             [compareWith]="compareOsValoresDoEstado">
             <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado.name }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="estado.hasError('required')">
+            Estado é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1" rowspan="1">
@@ -49,6 +70,9 @@
           <mat-select formControlName="cidade" [compareWith]="compareOsValoresDoCidade">
             <mat-option *ngFor="let cidade of cidades" [value]="cidade">{{ cidade.name }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="cidade.hasError('required')">
+            Cidade é obrigatório
+          </mat-error>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>

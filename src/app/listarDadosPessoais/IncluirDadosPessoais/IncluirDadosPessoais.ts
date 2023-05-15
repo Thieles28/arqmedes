@@ -1,11 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Cidades } from 'src/app/model/Cidades';
 import { DadosPessoais } from 'src/app/model/DadosPessoais';
 import { EstadoCivil } from 'src/app/model/EstadoCivil';
 import { Estados } from 'src/app/model/Estados';
 import { ListarDadosPessoaisService } from '../listarDadosPessoais.service';
+import { Validacoes } from 'src/app/validation/validacoes';
 
 @Component({
   selector: 'app-incluirDadosPessoais',
@@ -36,7 +42,10 @@ export class IncluirDadosPessoais implements OnInit {
   criarDadosPessoaisForm(dadosPessoais: DadosPessoais) {
     this.dadosPessoaisForm = this.fb.group({
       nome: [dadosPessoais.nome, [Validators.required]],
-      cpf: [dadosPessoais.cpf, [Validators.required]],
+      cpf: [
+        dadosPessoais.cpf,
+        Validators.compose([Validators.required, Validacoes.ValidaCpf]),
+      ],
       profissao: [dadosPessoais.profissao, [Validators.required]],
       dataNascimento: [dadosPessoais.dataNascimento, [Validators.required]],
       estadoCivil: [dadosPessoais.estadoCivil, [Validators.required]],
@@ -95,6 +104,26 @@ export class IncluirDadosPessoais implements OnInit {
           }
         });
       });
+  }
+
+  get nome() {
+    return this.dadosPessoaisForm.get('nome') as FormControl;
+  }
+
+  get cpf() {
+    return this.dadosPessoaisForm.get('cpf') as FormControl;
+  }
+
+  get profissao() {
+    return this.dadosPessoaisForm.get('profissao') as FormControl;
+  }
+
+  get dataNascimento() {
+    return this.dadosPessoaisForm.get('dataNascimento') as FormControl;
+  }
+
+  get estadoCivil() {
+    return this.dadosPessoaisForm.get('estadoCivil') as FormGroup;
   }
 
   get estado() {
